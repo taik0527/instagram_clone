@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.1'
+ruby '2.6.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.6'
@@ -56,3 +56,16 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'bootstrap'
+gem 'slim-rails'
+gem 'html2slim'
+gem 'kaminari'
+gem 'sorcery'
+gem 'rubocop'
+gem 'redis-rails'
+gem 'annotate'
+gem 'better_errors'
+gem 'binding_of_caller'
+gem 'pry-byebug', group: :development
+gem 'pry-rails'
