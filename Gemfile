@@ -69,3 +69,7 @@ gem 'better_errors'
 gem 'binding_of_caller'
 gem 'pry-byebug', group: :development
 gem 'pry-rails'
+gem 'font-awesome-sass'
+gem 'jquery-rails'
+gem 'popper_js'
+gem 'rails-i18n'
