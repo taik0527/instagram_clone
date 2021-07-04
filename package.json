@@ -1,5 +1,13 @@
 {
   "name": "instagram_clone",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap-material-design": "^4.1.3",
+    "swiper": "^6.7.5"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/telva0527/instagram_clone.git",
+  "author": "telva0527 <telva0527@gmail.com>",
+  "license": "MIT"
 }
