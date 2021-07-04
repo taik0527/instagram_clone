@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    ＠users = User.all
+    @users = User.all
   end
 
   def new
@@ -11,21 +11,18 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       auto_login(@user)
-      redirect_to root_path, success: "ユーザーを作成しました"
+      redirect_to root_path, success: 'ユーザーを作成しました'
     else
-      flash.now[:danger] = "ユーザーの作成に失敗しました"
+      flash.now[:danger] = 'ユーザーの作成に失敗しました'
       render :new
     end
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
-  def destroy
-  end
+  def destroy; end
 
   private
 

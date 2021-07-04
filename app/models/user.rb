@@ -15,6 +15,7 @@
 #  index_users_on_email  (email) UNIQUE
 #
 class User < ApplicationRecord
+  has_one_attached :image
   authenticates_with_sorcery!
 
   validates :username, uniqueness: true, presence: true
