@@ -7,6 +7,8 @@ html
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
+    = stylesheet_link_tag "https://unpkg.com/swiper/swiper-bundle.css"
+    = javascript_include_tag "https://unpkg.com/swiper/swiper-bundle.css"
   body
     - if logged_in?
       = render 'shared/header'
