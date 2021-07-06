@@ -27,7 +27,14 @@ class PostsController < ApplicationController
 
   def update
     @post = current_user.posts.find(params[:id])
+    if params[:post][:image_ids]
+      params[:post][:image_ids].each do |image_id|
+        image = @post.images.find(image_id)
+        image.purge
+      end
+    end
     if @post.update(post_params)
+      flash[:success] = "編集しました"
       redirect_to post_path(@post), success: '投稿を更新しました'
     else
       flash.now[:danger] = '投稿を更新できません'

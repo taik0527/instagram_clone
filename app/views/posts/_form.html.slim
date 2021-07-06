@@ -3,8 +3,11 @@
   .form-group
     = f.label :images
     = f.file_field :images, multiple: true, class: 'form-control'
-    - post.images.each do |image|
-      = image_tag image, size: '100x100', class: 'image-thumbnail'
+    - if @post.images.present?
+      p 現在登録されている画像（削除するものはチェックしてください）
+      - post.images.each do |image|
+        = f.check_box :image_ids, {multiple: true}, image.id, false
+        = image_tag image, size:"100x100"
   .form-group
     = f.label :body
     = f.text_area :body, class: 'form-control'
