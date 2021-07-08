@@ -50,6 +50,11 @@ class PostsController < ApplicationController
     redirect_to posts_path, success: '投稿を削除しました'
   end
 
+  def like_posts
+    @posts = current_user.like_posts.includes(:user).page(params[:page]).order(created_at: :desc).per(10)
+    render :index
+  end
+
   private
 
   def post_params

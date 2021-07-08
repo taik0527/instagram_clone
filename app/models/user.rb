@@ -15,10 +15,13 @@
 #  index_users_on_email  (email) UNIQUE
 #
 class User < ApplicationRecord
+  authenticates_with_sorcery!
+
   has_one_attached :image
   has_many :posts
   has_many :comments
-  authenticates_with_sorcery!
+  has_many :likes, dependent: :destroy
+  has_many :like_posts, through: :likes, source: :post
 
   validates :username, uniqueness: true, presence: true
   validates :email, uniqueness: true
@@ -28,5 +31,17 @@ class User < ApplicationRecord
 
   def own?(object)
     id == object.user_id
+  end
+
+  def like(post)
+    like_posts << post
+  end
+
+  def unlike(post)
+    like_posts.destroy(post)
+  end
+  
+  def like?(post)
+    like_posts.include?(post)
   end
 end
