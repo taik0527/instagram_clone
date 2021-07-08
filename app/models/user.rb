@@ -17,6 +17,7 @@
 class User < ApplicationRecord
   has_one_attached :image
   has_many :posts
+  has_many :comments
   authenticates_with_sorcery!
 
   validates :username, uniqueness: true, presence: true
