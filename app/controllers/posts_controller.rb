@@ -1,6 +1,13 @@
+# frozen_string_literal: true
+
 class PostsController < ApplicationController
   def index
-    @posts = Post.all.page(params[:page]).order(created_at: :desc).per(5)
+    @posts = if current_user
+               current_user.feed.includes(:user).page(params[:page]).order(created_at: :desc)
+             else
+               Post.all.includes(:user).page(params[:page]).order(created_at: :desc)
+             end
+    @users = User.recent(5)
   end
 
   def new
@@ -29,14 +36,12 @@ class PostsController < ApplicationController
 
   def update
     @post = current_user.posts.find(params[:id])
-    if params[:post][:image_ids]
-      params[:post][:image_ids].each do |image_id|
-        image = @post.images.find(image_id)
-        image.purge
-      end
+    params[:post][:image_ids]&.each do |image_id|
+      image = @post.images.find(image_id)
+      image.purge
     end
     if @post.update(post_params)
-      flash[:success] = "編集しました"
+      flash[:success] = '編集しました'
       redirect_to post_path(@post), success: '投稿を更新しました'
     else
       flash.now[:danger] = '投稿を更新できません'

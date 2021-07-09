@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   skip_before_action :require_login, only: %i[new create]
   def index
-    @users = User.all
+    @users = User.all.page(params[:page]).order(created_at: :desc)
   end
 
   def new
@@ -19,11 +21,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def show; end
-
-  def edit; end
-
-  def destroy; end
+  def show
+    @user = User.find(params[:id])
+  end
 
   private
 
