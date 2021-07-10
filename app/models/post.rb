@@ -28,4 +28,8 @@ class Post < ApplicationRecord
   validates :body, presence: true, length: { maximum: 1000 }
 
   scope :feed_of, ->(user) { where(user_id: user.following_ids << user.id) }
+  scope :body_contain, ->(word) { where('posts.body LIKE ?', "%#{word}%") }
+  scope :username_contain, ->(word) { joins(:user).where('username like ?', "%#{word}%") }
+  scope :comment_body_contain, ->(word) { joins(:comments).where('comments.body like ? ', "%#{word}%") }
+
 end

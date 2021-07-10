@@ -60,9 +60,14 @@ class PostsController < ApplicationController
     render :index
   end
 
+  def search
+    @posts = @search_form.search.includes(:user).page(params[:page])
+  end
+
   private
 
   def post_params
     params.require(:post).permit(:body, images: [])
   end
+  
 end
