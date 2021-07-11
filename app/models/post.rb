@@ -24,8 +24,9 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  validates :images, presence: true
   validates :body, presence: true, length: { maximum: 1000 }
+  validates :images, presence: true
+
 
   scope :feed_of, ->(user) { where(user_id: user.following_ids << user.id) }
   scope :body_contain, ->(word) { where('posts.body LIKE ?', "%#{word}%") }
