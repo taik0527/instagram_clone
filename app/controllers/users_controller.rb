@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.avatar.attach(io: File.open(Rails.root.join('app/assets/images/profile-placeholder.png')), filename: 'profile-placeholder.png')
     if @user.save
       auto_login(@user)
       redirect_to root_path, success: 'ユーザーを作成しました'
@@ -24,7 +25,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
-
+  
   private
 
   def user_params
