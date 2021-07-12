@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SearchPostsForm
   include ActiveModel::Model
   include ActiveModel::Attributes
@@ -8,7 +10,11 @@ class SearchPostsForm
 
   def search
     scope = Post.distinct
-    scope = splited_bodies.map { |splited_body| scope.body_contain(splited_body) }.inject { |result, scp| result.or(scp) } if body.present?
+    if body.present?
+      scope = splited_bodies.map do |splited_body|
+                scope.body_contain(splited_body)
+              end.inject { |result, scp| result.or(scp) }
+    end
     scope = scope.comment_body_contain(comment_body) if comment_body.present?
     scope = scope.username_contain(username) if username.present?
     scope

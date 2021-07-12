@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root 'posts#index'
 
@@ -17,5 +19,9 @@ Rails.application.routes.draw do
   resources :relationships, only: %i[create destroy]
   namespace :mypage do
     resource :account, only: %i[edit update]
+    resources :activities, only: :index
+  end
+  resources :activities, only: [] do
+    resource :read, only: :create
   end
 end
