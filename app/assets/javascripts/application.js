@@ -13,6 +13,9 @@
 //= require jquery
 //= require rails-ujs
 //= require activestorage
-//= require_tree .
 //= require swiper/swiper-bundle.js
 //= require swiper.js
+//= require bootstrap
+//= require_tree .
+
+

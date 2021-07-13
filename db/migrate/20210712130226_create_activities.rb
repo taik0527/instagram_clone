@@ -1,8 +1,10 @@
-class CreateActivates < ActiveRecord::Migration[5.2]
+# frozen_string_literal: true
+
+class CreateActivities < ActiveRecord::Migration[5.2]
   def change
-    create_table :activates do |t|
+    create_table :activities do |t|
       t.references :subject, polymorphic: true
-      t.references :user, foreign_key: true, null: false
+      t.references :user, foreign_key: true
       t.integer :action_type, null: false
       t.boolean :read, null: false, default: false
 

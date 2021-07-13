@@ -15,7 +15,7 @@ class SearchPostsForm
                 scope.body_contain(splited_body)
               end.inject { |result, scp| result.or(scp) }
     end
-    scope = scope.comment_body_contain(comment_body) if comment_body.present?
+    scope = scope.comment_body_contain(body) if comment_body.present?
     scope = scope.username_contain(username) if username.present?
     scope
   end

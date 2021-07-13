@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PostsController < ApplicationController
+  before_action :require_login, only: %i[new create edit update destroy]
   def index
     @posts = if current_user
                current_user.feed.includes(:user).page(params[:page]).order(created_at: :desc)
@@ -15,12 +16,26 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(post_params)
+    @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to post_path(@post), success: '投稿を作成しました'
+      redirect_to posts_path, success: '投稿しました'
     else
-      flash.now[:danger] = '投稿を作成に失敗しました'
+      flash.now[:danger] = '投稿に失敗しました'
       render :new
+    end
+  end
+
+  def edit
+    @post = current_user.posts.find(params[:id])
+  end
+
+  def update
+    @post = current_user.posts.find(params[:id])
+    if @post.update(post_params)
+      redirect_to posts_path, success: '投稿を更新しました'
+    else
+      flash.now[:danger] = '投稿の更新に失敗しました'
+      render :edit
     end
   end
 
@@ -30,34 +45,10 @@ class PostsController < ApplicationController
     @comment = Comment.new
   end
 
-  def edit
-    @post = current_user.posts.find(params[:id])
-  end
-
-  def update
-    @post = current_user.posts.find(params[:id])
-    params[:post][:image_ids]&.each do |image_id|
-      image = @post.images.find(image_id)
-      image.purge
-    end
-    if @post.update(post_params)
-      flash[:success] = '編集しました'
-      redirect_to post_path(@post), success: '投稿を更新しました'
-    else
-      flash.now[:danger] = '投稿を更新できません'
-      render :edit
-    end
-  end
-
   def destroy
     @post = current_user.posts.find(params[:id])
-    @post.destroy
+    @post.destroy!
     redirect_to posts_path, success: '投稿を削除しました'
-  end
-
-  def like_posts
-    @posts = current_user.like_posts.includes(:user).page(params[:page]).order(created_at: :desc).per(10)
-    render :index
   end
 
   def search

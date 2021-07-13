@@ -21,13 +21,15 @@
 class Post < ApplicationRecord
   has_many_attached :images
   belongs_to :user
+
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :like_users, through: :likes, source: :user
+  has_one :activity, as: :subject, dependent: :destroy
 
   validates :body, presence: true, length: { maximum: 1000 }
   validates :images, presence: true
 
-  scope :feed_of, ->(user) { where(user_id: user.following_ids << user.id) }
   scope :body_contain, ->(word) { where('posts.body LIKE ?', "%#{word}%") }
   scope :username_contain, ->(word) { joins(:user).where('username like ?', "%#{word}%") }
   scope :comment_body_contain, ->(word) { joins(:comments).where('comments.body like ? ', "%#{word}%") }

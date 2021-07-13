@@ -3,25 +3,25 @@
 Rails.application.routes.draw do
   root 'posts#index'
 
-  resources :users, only: %i[index new create show]
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
 
+  resources :users, only: %i[index new create show]
   resources :posts, shallow: true do
-    resources :comments
-    resources :likes, only: %i[create destroy]
     collection do
-      get :like_posts
       get :search
     end
+    resources :comments
   end
+  resources :likes, only: %i[create destroy]
   resources :relationships, only: %i[create destroy]
+  resources :activities, only: [] do
+    patch :read, on: :member
+  end
+
   namespace :mypage do
     resource :account, only: %i[edit update]
-    resources :activities, only: :index
-  end
-  resources :activities, only: [] do
-    resource :read, only: :create
+    resources :activities, only: %i[index]
   end
 end

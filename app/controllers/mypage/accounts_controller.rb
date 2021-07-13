@@ -19,7 +19,7 @@ module Mypage
     private
 
     def account_params
-      params.require(:user).permit(:username, :avatar)
+      params.require(:user).permit(:email, :username, :avatar, :avatar_cache)
     end
   end
 end
