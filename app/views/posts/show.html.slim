@@ -4,12 +4,12 @@
       .swiper-wrapper
         - @post.images.each do |image|
           .swiper-slide
-            = image_tag image.variant(resize:'1000x1000').processed
+            = image_tag image
       .swiper-pagination
   .image-info-box
     .profile-box.p-3
       .d-flex.align-items-center
-        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+        = image_tag @post.user.avatar, size: '40x40', class: 'rounded-circle mr-1'
         = @post.user.username
         - if current_user&.own?(@post)
           .ml-auto
@@ -17,12 +17,15 @@
               = icon 'far', 'trash-alt', class: 'fa-lg'
             = link_to edit_post_path(@post) do
               = icon 'far', 'edit', class: 'fa-lg'
+        - if current_user && !current_user.own?(@post)
+          .ml-auto
+            = render 'like_area', post: @post
     hr.m-0
     .post-body.p-3
       / 投稿の本文
       .row.no-gutters
         .col-2
-          = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+          = image_tag @post.user.avatar, size: '40x40', class: 'rounded-circle'
         .col-10
           = simple_format(@post.body)
       hr

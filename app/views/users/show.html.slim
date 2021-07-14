@@ -1,8 +1,11 @@
 .container
   .row
-    .col-md-6.offset-md-3
+    .col-md-10.offset-md-1
       .card
         .card-body
+          - if current_user&.id == @user.id
+            .text-center.mb-3
+              = link_to 'プロフィール編集', edit_mypage_account_path, class: 'btn btn-raised btn-warning'
           .text-center.mb-3
             = image_tag @user.avatar, size: '100x100', class: 'rounded-circle mr-1'
           .profile.text-center.mb-3
@@ -10,5 +13,5 @@
           .text-center
             = render 'follow_area', user: @user
           hr
-            .row
-              = render partial: 'posts/thumbnail_post', collection: @user.posts
+          .row
+            = render partial: 'posts/thumbnail_post', collection: @user.posts

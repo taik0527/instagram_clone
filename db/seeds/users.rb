@@ -8,7 +8,8 @@ puts 'Start inserting seed "users" ...'
     password: 'password',
     password_confirmation: 'password'
   )
-  user.avatar.attach(io: File.open(Rails.root.join('app/assets/images/profile-placeholder.png')), filename: 'profile-placeholder.png')
+  user.avatar.attach(io: File.open(Rails.root.join('app/assets/images/profile-placeholder.png')),
+                     filename: 'profile-placeholder.png')
   user.save
   puts "\"#{user.username}\" has created!"
 end
