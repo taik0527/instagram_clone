@@ -1,14 +1,11 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  before_action :require_login, only: %i[create edit update destroy]
+
   def create
     @comment = current_user.comments.build(comment_params)
     @comment.save
-  end
-
-  def destroy
-    @comment = current_user.comments.find(params[:id])
-    @comment.destroy
   end
 
   def edit
@@ -18,6 +15,11 @@ class CommentsController < ApplicationController
   def update
     @comment = current_user.comments.find(params[:id])
     @comment.update(comment_update_params)
+  end
+
+  def destroy
+    @comment = current_user.comments.find(params[:id])
+    @comment.destroy!
   end
 
   private
