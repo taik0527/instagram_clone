@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@popperjs/core@^2.9.2":
+  "integrity" "sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q=="
+  "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.9.2.tgz"
+  "version" "2.9.2"
+
 "bootstrap-material-design@^4.1.1":
   "integrity" "sha1-h0M9sL9k1qCvsPX6qoYGE0ydJtI="
   "resolved" "https://registry.npmjs.org/bootstrap-material-design/-/bootstrap-material-design-4.1.1.tgz"
@@ -13,6 +18,11 @@
   "version" "3.0.0"
   dependencies:
     "ssr-window" "^3.0.0-alpha.1"
+
+"popper.js@^1.14.5":
+  "integrity" "sha512-fs4Sd8bZLgEzrk8aS7Em1qh+wcawtE87kRUJQhK6+LndyV1HerX7+LURzAylVaTyWIn5NTB/lyjnWqw/AZ6Yrw=="
+  "resolved" "https://registry.npmjs.org/popper.js/-/popper.js-1.14.5.tgz"
+  "version" "1.14.5"
 
 "ssr-window@^3.0.0", "ssr-window@^3.0.0-alpha.1":
   "integrity" "sha512-q+8UfWDg9Itrg0yWK7oe5p/XRCJpJF9OBtXfOPgSJl+u3Xd5KI328RUEvUqSMVM9CiQUEf1QdBzJMkYGErj9QA=="
