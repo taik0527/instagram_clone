@@ -71,6 +71,7 @@ gem 'html2slim'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'letter_opener_web'
+gem 'meta-tags'
 gem 'mini_magick'
 gem 'popper_js'
 gem 'pry-byebug', group: :development
